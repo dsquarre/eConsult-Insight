@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import './App.css'
-import Result from "./result";
+import DashBoard from "./dashboard";
 
 
 const GetLink = () => {
     const [link, setLink] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
-    const [processedData, setProcessedData] = useState(null);
+    const [result, setresult] = useState(null);
     const [error, setError] = useState(null);
     
     const handleSubmit = async (event) => {
@@ -19,7 +19,7 @@ const GetLink = () => {
 
         setError(null);
         setIsProcessing(true); 
-        setProcessedData(null); 
+        setresult(null); 
         
         console.log("Submitting link for analysis:", link);
         
@@ -48,7 +48,7 @@ const GetLink = () => {
 
     useEffect(() => {
         if (isProcessing) {
-            const fetchProcessedText = async () => {
+            const fetchProcessedResult = async () => {
                 try {
                     const response = await fetch('http://0.0.0.0:8000/result/');
                     
@@ -56,13 +56,13 @@ const GetLink = () => {
                          throw new Error(`Failed to fetch processed result: ${response.statusText}`);
                     }
                     
-                    const data = await response.json(); 
+                    const result = await response.json(); 
                     
-                    // 'data' is an object like: 
-                    // {indexed clean comments:[] }
-                    setProcessedData(data); 
+                    // 'result' is a JSON file like: 
+                    // {wordcount:{word:count}, sentiment:{+:val, -:val, 0:val}, important_rare:[comment1,...]}
+                    setresult(result); 
                     setIsProcessing(false); 
-                    console.log("Structured data fetched:", data);
+                    console.log("Structured data fetched:", result);
 
                 } catch (err) {
                     console.error('Error fetching structured data:', err);
@@ -71,7 +71,7 @@ const GetLink = () => {
                 }
             };
             
-            fetchProcessedText();
+            fetchProcessedResult();
         }
     }, [isProcessing]);
 
@@ -95,10 +95,10 @@ const GetLink = () => {
         );
     }
 
-    if (processedData) {
+    if (result) {
         return (
             <div>
-                <Result data={processedData} />
+                <DashBoard obj={result} />
             </div>
         );
     }
