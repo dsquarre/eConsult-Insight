@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+* {
+  box-sizing : border-box;
+}
+
+body{
+  font-family: 'Lato',sans-serif;
+  background-color: white;
+}
+h1,h2,h3,h4,h5,p{
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.spinner {
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  padding: 12px 24px; /* Added horizontal padding */
+  font-size: large;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px; /* Slightly rounded corners */
+  background-color: #007bff; /* A nice primary color */
+  color: white;
+  margin-top: 20px; /* Space above the button */
+}
+
+
+.textbox {
+  /* Box model for the container */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 150px; 
+  width: 90%; 
+  max-width: 800px; 
+  margin: 20px auto; 
+  padding: 20px;
+  border: 2px solid rgb(117, 112, 112); 
+  border-radius: 8px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+
+.textbox input {
+  width: 95%; 
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
