@@ -13,10 +13,11 @@ import asyncio
 from fastapi import FastAPI, Form, HTTPException
 
 app = FastAPI()
-
+from transformer import Analysis
+from tfidf import Extract
 #app.mount("/static",StaticFiles(directory="build/static"),name="static")
 
-
+input_file = None
 
 headers = {'Access-Control-Expose-Headers': 'Content-Disposition','Access-Control-Allow-Origin':'http://localhost:3000'}
 app.add_middleware(
@@ -29,18 +30,28 @@ app.add_middleware(
 
 @app.on_event("startup")  
 async def startup_event():
-    pass
+    global input_file
+    input_file = None
 
 @app.post("/upload/")
-async def getLink(text: str = Form(...)):
-    return {"message":"Link received"}
+async def getFile(file: UploadFile):
+    global input_file
+    import time
+    time.sleep(2)
+    input_file = file
+    return {"message":"File received"}
     
 
 
 @app.get("/result/")
 async def sendData():
-    return FileResponse("package.json")
-
+    global input_file
+    sentences,sentiment0,best = Analysis(input_file)
+    word_cloud,sentiment = Extract(sentences,sentiment0)
+    import time
+    time.sleep(2)
+    
+    return word_cloud,sentiment,best
 @app.get("/")
 def read_index():
     #return FileResponse("build/index.html")

@@ -1,10 +1,10 @@
 import './App.css';
-import GetLink  from "./GetLink"
+import GetFile  from "./GetFile"
 
 const App = () => {
     return (
     <div className="container">
-      <GetLink />
+      <GetFile/>
     </div>
   )
 };
