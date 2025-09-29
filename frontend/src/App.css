@@ -41,34 +41,26 @@ button {
 }
 
 
-.textbox {
-  /* Box model for the container */
+.dropzone{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 150px; 
-  width: 90%; 
-  max-width: 800px; 
-  margin: 20px auto; 
-  padding: 20px;
-  border: 2px solid rgb(117, 112, 112); 
-  border-radius: 8px; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  height: 560px;
+  padding : 20px;
 }
-
-
-.textbox input {
-  width: 95%; 
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.actions{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 560px;
 }
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+.error-message{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
 }
