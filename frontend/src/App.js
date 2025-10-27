@@ -5,7 +5,7 @@ import DummyData from './DummyFile';
 const App = () => {
     return (
     <div className="container">
-      {/* <GetFile/> */}
+      
       <DummyData/>
     </div>
   )
