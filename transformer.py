@@ -6,8 +6,17 @@ import warnings
 import os
 warnings.filterwarnings('ignore')
 
-class EnhancedSentimentCommentAnalyzer:
-    
+#wtf is this llm written code!!?
+#basically youre doing sentiment analysis and summarization with fallbacks
+#but the problem is that youre first dividing all comments into chunks and then each chunks's top result.
+#This just loses all of the nuance and information and makes it practically wrong.
+#You should be doing batch processing and only return label(i dont think score is needed,consult others).
+#Similarily for summarization, you just summarize chunk of commments into one summary which again makes word cloud useless.
+#You should summarize each comment individually using batch processing and return the list having same length as original.
+#Also, rare comment finding is good but need to check if sentiment extremity is good parameter.
+#There are so many print and return statements and not consistent with what I defined as input/output for this class.
+class SentimentSummarization:
+
 
     def __init__(self, 
                  sentiment_model: str = "cardiffnlp/twitter-roberta-base-sentiment-latest",
@@ -100,7 +109,7 @@ class EnhancedSentimentCommentAnalyzer:
             "anonymized": anonymized
         }
 
-    def enhanced_sentiment_analysis(self, text: str) -> Dict:
+    def sentiment_analysis(self, text: str) -> Dict:
        
         if self.models_loaded and hasattr(self, 'sentiment_pipeline'):
             try:
@@ -111,7 +120,7 @@ class EnhancedSentimentCommentAnalyzer:
                 return {
                     'label': top_result['label'],
                     'score': top_result['score'],
-                    'confidence': 'high' if top_result['score'] > 0.8 else 'medium' if top_result['score'] > 0.6 else 'low',
+                    'confidence': 'high' if top_result['score'] > 0.8 else 'medium' if top_result['score'] > 0.5 else 'low',
                     'all_scores': results[0]
                 }
             except Exception as e:
