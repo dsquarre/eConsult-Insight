@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 # You are using matplotlib to display word cloud which is not what was asked!! You have to return a dictionary containing words and their frequency. Rest will be handled in front end
 # Sentiment analysis needs to be done in batch, each comment having its own sentiment.. you have trained the model but now you also have to use it to predict sentiment of actual comments.
 # Please fix all these issues, so your output is a dictionary of words frequency and a list of sentiments for each comment.
-
+# Also you can change the name from tfidf.py to something else suitable since youre not using tf idf here.
 
 # Dataset upload
 df = pd.read_csv("/content/Twitter_Data.csv", encoding="latin-1")
