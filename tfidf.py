@@ -14,6 +14,14 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
 
+# You are loading data from csv file which is not what the input youre supposed to take.
+# You get a list of sentences as input to your main function.
+# There is no class to import or any mention of which function to import and a lot of code outside without __init__==__main__, its not importable to main.py
+# You are using matplotlib to display word cloud which is not what was asked!! You have to return a dictionary containing words and their frequency. Rest will be handled in front end
+# Sentiment analysis needs to be done in batch, each comment having its own sentiment.. you have trained the model but now you also have to use it to predict sentiment of actual comments.
+# Please fix all these issues, so your output is a dictionary of words frequency and a list of sentiments for each comment.
+# Also you can change the name from tfidf.py to something else suitable since youre not using tf idf here.
+
 # Dataset upload
 df = pd.read_csv("/content/Twitter_Data.csv", encoding="latin-1")
 df.head()
