@@ -56,3 +56,6 @@ async def sendData():
 def read_index():
     #return FileResponse("build/index.html")
     return {"Hello":"World"}
+
+
+#add front and back
