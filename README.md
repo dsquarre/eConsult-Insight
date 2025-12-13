@@ -2,7 +2,7 @@
 AI-assisted analysis of large-scale public feedback
 
 How to run:
-'''bash
+'''
 python3 main.py
 '''
 
