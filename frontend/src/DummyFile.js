@@ -3,9 +3,9 @@ import Dashboard from "./dashboard";
 
 const obj = {
   sentiment: {
-    "+": 42,   // positive comments count
-    "-": 16,   // negative comments count
-    "0": 25    // neutral comments count
+    "positive": 42,   // positive comments count
+    "negative": 16,   // negative comments count
+    "neutral": 25    // neutral comments count
   },
   wordcount: {
     usability: 61,

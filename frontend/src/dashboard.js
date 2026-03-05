@@ -24,9 +24,9 @@ const Dashboard = ({ obj }) => {
   }
   // 1. Pie Chart data for sentiment
   const sentimentData = [
-    { name: "Positive", value: obj.sentiment?.["+"] || 0 },
-    { name: "Negative", value: obj.sentiment?.["-"] || 0 },
-    { name: "Neutral",  value: obj.sentiment?.["0"] || 0 }
+    { name: "Positive", value: obj.sentiment?.["positive"] || 0 },
+    { name: "Negative", value: obj.sentiment?.["negative"] || 0 },
+    { name: "Neutral",  value: obj.sentiment?.["neutral"] || 0 }
   ].filter(entry => entry.value > 0);
 
   // 2. WordCloud Data

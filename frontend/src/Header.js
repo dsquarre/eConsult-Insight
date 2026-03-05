@@ -13,7 +13,7 @@ export default function Header()
         //const apiUrl = process.env.NODE_ENV === 'production' ? window.location.origin: 'http://127.0.0.1:8000'; 
         const resp = await fetch("http://localhost:8000/"); 
         const sent = await resp.json()
-        setmsg(sent.data)
+        setmsg(sent.message)
     }
     useEffect(()=>{fetchmsg()},[])    
     return (

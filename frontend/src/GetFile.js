@@ -34,54 +34,40 @@ const GetFile = () => {
         formData.append("file", file);
 
         try {
-            const endpoint = "http://0.0.0.0:8000/upload/";
+            const endpoint = "http://localhost:8000/upload/";
             const response = await fetch(endpoint, {
                 method: "POST",
                 body: formData
             });
 
             if (response.ok) {
-                console.log("File submitted successfully. Awaiting processing.");
+                console.log("File submitted successfully. Fetching results...");
+                
+                const resultResponse = await fetch('http://localhost:8000/result/');
+                
+                if (!resultResponse.ok) {
+                     throw new Error(`Failed to fetch processed result: ${resultResponse.statusText}`);
+                }
+                
+                const result = await resultResponse.json(); 
+                setresult(result); 
+                console.log("Structured data fetched:", result);
             } else {
                 const errorText = await response.text();
-                throw new Error(`Server failed to process file: ${errorText}`);
+                let errorMessage = errorText;
+                try {
+                    const errorJson = JSON.parse(errorText);
+                    if (errorJson.error) errorMessage = errorJson.error;
+                } catch (e) {}
+                throw new Error(errorMessage);
             }
         } catch (err) {
             console.error("Submission error:", err);
-            setError(`Failed to submit file. Please check your network. (${err.message})`);
-            setIsProcessing(false); // Stop processing state on failure
+            setError(`Failed to submit file. (${err.message})`);
+        } finally {
+            setIsProcessing(false);
         }
     };
-
-    useEffect(() => {
-        if (isProcessing) {
-            const fetchProcessedResult = async () => {
-                try {
-                    const response = await fetch('http://0.0.0.0:8000/result/');
-                    
-                    if (!response.ok) {
-                         throw new Error(`Failed to fetch processed result: ${response.statusText}`);
-                    }
-                    
-                    const result = await response.json(); 
-                    
-                    // 'result' is a JSON file like: 
-                    // {wordcount:{word:count}, sentiment:{+:val, -:val, 0:val}, important_rare:[comment1,...]}
-                    setresult(result); 
-                    setIsProcessing(false); 
-                    console.log("Structured data fetched:", result);
-
-                } catch (err) {
-                    console.error('Error fetching structured data:', err);
-                    setError(`Error retrieving result. Expected JSON data but received an error: ${err.message}`);
-                    setIsProcessing(false);
-                }
-            };
-            
-            fetchProcessedResult();
-        }
-    }, [isProcessing]);
-
 
     if (error) {
         return (
