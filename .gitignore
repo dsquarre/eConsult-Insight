@@ -1,7 +1,19 @@
-__pycache__/
-env/
-frontend/nodu_modules
-frontend/package.json
-frontend/package-lock.json
-frontend/public
+# Python
+**/__pycache__/
+*.py[cod]
 
+# Environments
+.env
+frontend/.env
+
+# Node / JS
+node_modules/
+frontend/node_modules/
+
+# Build outputs
+backend/
+frontend/build/
+frontend/public/  <-- (Only ignore this if your build script generates it)
+
+# Misc
+frontend/summary.pdf
